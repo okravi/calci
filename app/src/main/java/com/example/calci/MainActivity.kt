@@ -30,4 +30,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun onDecimal(view: View) {
+        if ("." !in (binding.tvInput.text) && (binding.tvInput.text.isNotEmpty())) {
+            binding.tvInput.append(".")
+        }
+    }
+
 }
