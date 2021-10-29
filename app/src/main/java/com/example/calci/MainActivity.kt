@@ -7,12 +7,8 @@ import android.widget.Button
 import android.widget.Toast
 import com.example.calci.databinding.ActivityMainBinding
 
-//import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-   /* override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)*/
 
     private lateinit var binding: ActivityMainBinding
 
@@ -24,23 +20,12 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
-
-
-
-
-
-
-//}
-
     fun onDigit(view: View){
        binding.tvInput.append((view as Button).text)
 
     }
 
-    fun onCLR(view: android.view.View) {
-       // tvInput.text = ""
+    fun onCLR (view: View){
         binding.tvInput.text = ""
 
     }
