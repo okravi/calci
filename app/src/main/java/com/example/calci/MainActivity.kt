@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.Toast
 import com.example.calci.databinding.ActivityMainBinding
 import java.lang.ArithmeticException
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
@@ -64,6 +65,26 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun removeExcessiveZeroes(value: String) : String{
+        //var shortenedResult = value.substring(0, 11)
+        var shortenedResult = value
+        when (value.length) { !in 0..11 -> shortenedResult = value.substring(0, 11)}
+
+
+        Toast.makeText(this@MainActivity, "Trying to shorten: $shortenedResult", Toast.LENGTH_SHORT).show()
+        //TimeUnit.SECONDS.sleep(5L)
+        while (shortenedResult.endsWith("0")) {
+            shortenedResult = shortenedResult.substring(0, shortenedResult.length -1)
+
+            Toast.makeText(this@MainActivity, "Shortening: $shortenedResult", Toast.LENGTH_SHORT).show()
+        }
+        if (shortenedResult.endsWith(".")){
+            shortenedResult = shortenedResult.substring(0, shortenedResult.length -1)
+        }
+        //    shortenedResult = shortenedResult
+        return shortenedResult
+    }
+
     fun onEquals(view: android.view.View) {
         if (lastDigit) {
             var tvValue = binding.tvInput.text.toString()
@@ -73,16 +94,19 @@ class MainActivity : AppCompatActivity() {
 
                 val firstNumber = tvValue.substringBeforeLast(operationToDo)
                 val secondNumber = tvValue.substringAfterLast(operationToDo)
+                var result: String = ""
 
                 when (operationToDo){
 
-                    "-" -> binding.tvInput.text = (firstNumber.toDouble() - secondNumber.toDouble()).toString()
-                    "+" -> binding.tvInput.text = (firstNumber.toDouble() + secondNumber.toDouble()).toString()
-                    "/" -> binding.tvInput.text = (firstNumber.toDouble() / secondNumber.toDouble()).toString()
-                    "*" -> binding.tvInput.text = (firstNumber.toDouble() * secondNumber.toDouble()).toString()
+                    "-" -> result = (firstNumber.toDouble() - secondNumber.toDouble()).toString()
+                    "+" -> result = (firstNumber.toDouble() + secondNumber.toDouble()).toString()
+                    "/" -> result = (firstNumber.toDouble() / secondNumber.toDouble()).toString()
+                    "*" -> result = (firstNumber.toDouble() * secondNumber.toDouble()).toString()
+
 
 
                 }
+                binding.tvInput.text = removeExcessiveZeroes(result)
                 //Toast.makeText(this@MainActivity, "a: $firstNumber, b: $secondNumber", Toast.LENGTH_SHORT).show()
 
             } catch (e: ArithmeticException) {
