@@ -14,6 +14,8 @@
         android:background="#efefef"
         android:textSize="48sp"
         android:maxLength="12"
+        android:padding="10dp"
+        android:gravity="right|bottom|center_vertical"
         />
 
 

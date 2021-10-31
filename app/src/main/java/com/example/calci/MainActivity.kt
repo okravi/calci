@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     var operatorAdded: Boolean = false
     var operationToDo = "x"
+
     fun onOperator(view: android.view.View) {
         if (!operatorAdded && binding.tvInput.text.isNotEmpty()){
             binding.tvInput.append((view as Button).text)
@@ -77,11 +78,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onEquals(view: android.view.View) {
+
         if (lastDigit) {
             val tvValue = binding.tvInput.text.toString()
 
             try {
-
 
                 val firstNumber = tvValue.substringBeforeLast(operationToDo)
                 val secondNumber = tvValue.substringAfterLast(operationToDo)
